@@ -1,11 +1,11 @@
-import React from 'react';
+import React,{Fragment } from 'react';
 import Home from './views/home'
 
 function App() {
   return (
-    <div>
+    <Fragment>
      <Home />
-    </div>
+    </Fragment>
   );
 }
 
