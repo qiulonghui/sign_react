@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ReactDOM, { createPortal } from 'react-dom'
 import { ModalMask, Modal, ModalHeader, ModalContent, CloseBtn } from './style'
 import WithBodyScrollPrevent from '../../../../common/WithBodyScrollPrevent'
-import WithTransition from '../../../../common/WithTransition'
 
 const container = document.createElement('div')
 
@@ -35,7 +34,6 @@ class AwardInfoModal extends Component {
 }
 
 const NewComponent = WithBodyScrollPrevent(AwardInfoModal)
-// const NewComponent2 = WithTransition(<NewComponent />)
 const renderAwardInfoModal = function () {
   ReactDOM.render(<NewComponent />, container)
 }

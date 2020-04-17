@@ -7,7 +7,8 @@ const preventDefault = function(e) {
 }
 
 function WithBodyScrollPrevent (WrappedComponent) {
-  const FadeTransition = WithTransition(WrappedComponent)
+  const WithTransComponent = WithTransition(WrappedComponent)
+  
 	return class extends Component {
 		componentDidMount() {
 			document.addEventListener('touchmove', preventDefault,{passive:false})
@@ -18,17 +19,9 @@ function WithBodyScrollPrevent (WrappedComponent) {
 		}
 
 		render() {
-			return (
-        <FadeTransition>
-          {/* <WrappedComponent {...this.props} /> */}
-        </FadeTransition>
-      )
+			return <WithTransComponent {...this.props}/>
 		}
 	}
 }
-
-
-
-// WithTransition()
 
 export default WithBodyScrollPrevent

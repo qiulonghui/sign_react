@@ -33,7 +33,7 @@ function WithTransition(WrappedComponent) {
           // onEnter={() => {}}
           onExited={this.props.handleTransitionExited}
         >
-          <WrappedComponent></WrappedComponent>
+          <WrappedComponent />
         </CSSTransition>
       )
     }
