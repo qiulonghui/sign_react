@@ -7,7 +7,7 @@ const http = axios.create({
 // request拦截器
 http.interceptors.request.use(
   config => {
-		Toast.loading('请稍后...')
+		Toast.loading('请稍后...',0) // duration = 0 loading 不会消失；隐藏 loading 需要手动调用 hide
     const ts = new Date().getTime()
     if(!config.params) config.params = {}
     config.params.ts = ts
