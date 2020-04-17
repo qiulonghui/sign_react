@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import WithTransition from './WithTransition'
 
+
 const preventDefault = function(e) {
 	e.preventDefault();
 }
 
 function WithBodyScrollPrevent (WrappedComponent) {
+  const FadeTransition = WithTransition(WrappedComponent)
 	return class extends Component {
 		componentDidMount() {
 			document.addEventListener('touchmove', preventDefault,{passive:false})
@@ -16,15 +18,17 @@ function WithBodyScrollPrevent (WrappedComponent) {
 		}
 
 		render() {
-			return <WrappedComponent {...this.props} />
+			return (
+        <FadeTransition>
+          {/* <WrappedComponent {...this.props} /> */}
+        </FadeTransition>
+      )
 		}
 	}
 }
 
-const Newcomponent = WithTransition(WithBodyScrollPrevent)
 
-Newcomponent
 
-WithTransition()
+// WithTransition()
 
 export default WithBodyScrollPrevent
