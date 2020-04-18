@@ -1,14 +1,11 @@
 import React, {Component} from 'react'
-import WithTransition from './WithTransition'
-
 
 const preventDefault = function(e) {
 	e.preventDefault();
 }
 
 function WithBodyScrollPrevent (WrappedComponent) {
-  const WithTransComponent = WithTransition(WrappedComponent)
-  
+
 	return class extends Component {
 		componentDidMount() {
 			document.addEventListener('touchmove', preventDefault,{passive:false})
@@ -19,7 +16,7 @@ function WithBodyScrollPrevent (WrappedComponent) {
 		}
 
 		render() {
-			return <WithTransComponent {...this.props}/>
+			return <WrappedComponent {...this.props}/>
 		}
 	}
 }
