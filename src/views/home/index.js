@@ -24,14 +24,14 @@ class Home extends Component {
 			React.$ToastHide()
 		})
 		
-		// this.showSubscribeTip()
+		this.showSubscribeTip()
 	}
 
 	showSubscribeTip = () => {
 		const modalOptions={
 			title: "提示",
 			content: "关注和留言微信公众号后参与活动",
-			// allowClose: false,
+			allowClose: false,
 			qrCode: true
 		}
 		showTextTipModal(modalOptions)

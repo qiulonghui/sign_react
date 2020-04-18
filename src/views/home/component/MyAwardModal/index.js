@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM, { createPortal } from 'react-dom'
 import WithBodyScrollPrevent from '../../../../common/WithBodyScrollPrevent'
-import ModalTransition from '../../../../common/ModalTransition'
+import ModalTransition from '../../../../common/ModalTransition/index'
 import { ModalMask, ModalWrapper, Modal, ModalHeader, ModalContent, CloseBtn } from './style'
 import showAwardInfoModal from '../AwardInfoModal'
 
