@@ -24,7 +24,7 @@ class MyAwardModal extends Component {
   }
 
   closeModal = () => {
-    this.setState({visible: false})
+    this.setState({ visible: false })
   }
 
   componentDidMount() {
@@ -33,37 +33,42 @@ class MyAwardModal extends Component {
     })
   }
 
+  renderModalMask = () => {
+    return <ModalMask />
+  }
+
+  renderModal = () => {
+    return (
+      <ModalWrapper onClick={this.closeModal}>
+        <Modal onClick={e => e.stopPropagation()}>
+          <ModalHeader></ModalHeader>
+          <ModalContent>
+            <div className="t-header">
+              <div className="col1">奖品</div>
+              <div className="col2">日期</div>
+              <div></div>
+            </div>
+            <div className="a-item">
+              <div className="name">爱奇艺视频会员月卡</div>
+              <div className="date">2020-05-20</div>
+              <div className="btn" onClick={handleBtnClick}>查看</div>
+            </div>
+            <div className="a-item">
+              <div className="name">爱奇艺视频会员月卡</div>
+              <div className="date">2020-05-20</div>
+              <div className="btn" onClick={handleBtnClick}>查看</div>
+            </div>
+          </ModalContent>
+          <CloseBtn onClick={this.closeModal}></CloseBtn>
+        </Modal>
+      </ModalWrapper>
+    )
+  }
+
   render() {
     return createPortal(
-      <div>
-        <ModalMask onClick={this.closeModal}>
-        </ModalMask>
-        <ModalTransition show={this.state.visible}  transitionExited={handleTransitionExited}>
-          <ModalWrapper>
-            <Modal onClick={e => e.stopPropagation()}>
-              <ModalHeader></ModalHeader>
-              <ModalContent>
-                <div className="t-header">
-                  <div className="col1">奖品</div>
-                  <div className="col2">日期</div>
-                  <div></div>
-                </div>
-                <div className="a-item">
-                  <div className="name">爱奇艺视频会员月卡</div>
-                  <div className="date">2020-05-20</div>
-                  <div className="btn" onClick={handleBtnClick}>查看</div>
-                </div>
-                <div className="a-item">
-                  <div className="name">爱奇艺视频会员月卡</div>
-                  <div className="date">2020-05-20</div>
-                  <div className="btn" onClick={handleBtnClick}>查看</div>
-                </div>
-              </ModalContent>
-              <CloseBtn onClick={this.closeModal}></CloseBtn>
-            </Modal>
-          </ModalWrapper>
-        </ModalTransition>
-      </div>,
+      <ModalTransition renderMask={this.renderModalMask} renderModal={this.renderModal} show={this.state.visible} transitionExited={handleTransitionExited}>
+      </ModalTransition>,
       document.body
     )
   }

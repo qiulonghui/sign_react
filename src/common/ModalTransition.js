@@ -4,16 +4,29 @@ import './style.css'
 
 function ModalTransition(props) {
   return (
-    <CSSTransition
-      in={props.show}
-      timeout={200}
-      classNames="modal"
-      unmountOnExit
-      // onEnter={() => {}}
-      onExited={props.transitionExited}
-    >
-      {props.children}
-    </CSSTransition>
+    <div>
+      <CSSTransition
+        in={props.show}
+        timeout={200}
+        classNames="mask"
+        unmountOnExit
+        // onEnter={() => {}}
+        onExited={props.transitionExited}
+      >
+        {props.renderMask()}
+      </CSSTransition>
+
+      <CSSTransition
+        in={props.show}
+        timeout={200}
+        classNames="modal"
+        unmountOnExit
+        // onEnter={() => {}}
+        onExited={props.transitionExited}
+      >
+        {props.renderModal()}
+      </CSSTransition>
+    </div>
   )
 }
 
