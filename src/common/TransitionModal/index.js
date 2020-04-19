@@ -1,8 +1,9 @@
 import React from 'react'
 import { CSSTransition } from 'react-transition-group'
+import {ModalMask, ModalWrapper} from './style'
 import './style.css'
 
-function ModalTransition(props) {
+function TransitionModal(props) {
   return (
     <div>
       <CSSTransition
@@ -13,7 +14,7 @@ function ModalTransition(props) {
         // onEnter={() => {}}
         onExited={props.transitionExited}
       >
-        {props.renderMask()}
+        <ModalMask />
       </CSSTransition>
 
       <CSSTransition
@@ -24,10 +25,12 @@ function ModalTransition(props) {
         // onEnter={() => {}}
         onExited={props.transitionExited}
       >
-        {props.renderModal()}
+        <ModalWrapper onClick={props.handleClose}>
+          {props.children}
+        </ModalWrapper>
       </CSSTransition>
     </div>
   )
 }
 
-export default ModalTransition
+export default TransitionModal

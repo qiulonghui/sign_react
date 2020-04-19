@@ -7,9 +7,9 @@ const http = axios.create({
 // request拦截器
 http.interceptors.request.use(
   config => {
-		Toast.loading('请稍后...',0) // duration = 0 loading 不会消失；隐藏 loading 需要手动调用 hide
+    Toast.loading('请稍后...', 0) // duration = 0 loading 不会消失；隐藏 loading 需要手动调用 hide
     const ts = new Date().getTime()
-    if(!config.params) config.params = {}
+    if (!config.params) config.params = {}
     config.params.ts = ts
     return config
   },
@@ -23,14 +23,20 @@ http.interceptors.request.use(
 // respone拦截器
 http.interceptors.response.use(
   response => {
-		return response.data
+    const { code, data } = response.data
+    if (code === '200') {
+      return data
+    } else {
+      Toast.hide() // 移除loading
+      return Promise.reject(response.data)
+    }
   },
   error => {
-		// http错误处理
-    console.log('err' + error) // for debug
-    const {message} = error
-		Toast.info(message)
-    return Promise.reject(error)
+    // http错误处理
+    const { message, response } = error
+    console.log('err', response) // for debug
+    Toast.info(message)
+    return Promise.reject(response)
   }
 )
 

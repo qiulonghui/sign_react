@@ -1,6 +1,6 @@
 import styled from 'styled-px2vw'
-import closeBtnPic from '../../../../assets/btn_close.png'
-import qrCode from '../../../../assets/ma.png'
+import closeBtnPic from '../../assets/btn_close.png'
+import qrCode from '../../assets/ma.png'
 
 export const ModalMask = styled.div`
 	position: fixed;

@@ -1,22 +1,36 @@
 import React, { Component } from 'react'
 import ReactDOM, { createPortal } from 'react-dom'
-import { ModalMask, Modal, ModalHeader, ModalContent, CloseBtn } from './style'
+import { Modal, ModalHeader, ModalContent, CloseBtn } from './style'
 import WithBodyScrollPrevent from '../../../../common/WithBodyScrollPrevent'
+import TransitionModal from '../../../../common/TransitionModal'
 
 const container = document.createElement('div')
+
+const handleTransitionExited = function () {
+  ReactDOM.unmountComponentAtNode(container)
+}
 
 class AwardInfoModal extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      visible: false
+    }
   }
 
-  closeModal=() => {
-    ReactDOM.unmountComponentAtNode(container)
+  closeModal = () => {
+    this.setState({ visible: false })
+  }
+
+  componentDidMount() {
+    this.setState({
+      visible: true
+    })
   }
 
   render() {
     return createPortal(
-      <ModalMask onClick={this.closeModal}>
+      <TransitionModal handleClose={this.closeModal} show={this.state.visible} transitionExited={handleTransitionExited}>
         <Modal onClick={e => e.stopPropagation()}>
           <ModalHeader></ModalHeader>
           <ModalContent>
@@ -27,7 +41,7 @@ class AwardInfoModal extends Component {
           </ModalContent>
           <CloseBtn onClick={this.closeModal}></CloseBtn>
         </Modal>
-      </ModalMask>,
+      </TransitionModal>,
       document.body
     )
   }

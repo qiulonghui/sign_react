@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import ReactDOM, { createPortal } from 'react-dom'
 import { Modal, ModalHeader, ModalContent, QrCode, CloseBtn } from './style'
-import WithBodyScrollPrevent from '../../../../common/WithBodyScrollPrevent'
-import BaseModal from '../../../../common/BaseModal'
+import WithBodyScrollPrevent from '../WithBodyScrollPrevent'
+import TransitionModal from '../TransitionModal'
 
 const container = document.createElement('div')
 
@@ -31,7 +31,7 @@ class TextTipModal extends Component {
   render() {
     const { title, content, allowClose, qrCode } = this.props
     return createPortal(
-      <BaseModal handleClose={allowClose ? this.closeModal:null} show={this.state.visible} transitionExited={handleTransitionExited}>
+      <TransitionModal handleClose={allowClose ? this.closeModal:null} show={this.state.visible} transitionExited={handleTransitionExited}>
         <Modal onClick={e => e.stopPropagation()}>
           <ModalHeader>{title}</ModalHeader>
           <ModalContent>
@@ -40,7 +40,7 @@ class TextTipModal extends Component {
           </ModalContent>
           {allowClose ? (<CloseBtn onClick={this.closeModal}></CloseBtn>) : null}
         </Modal>
-      </BaseModal>,
+      </TransitionModal>,
       document.body
     )
   }

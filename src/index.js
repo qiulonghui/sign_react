@@ -11,7 +11,7 @@ Toast.config({
 React.$Toast= function(content){
 	Toast.info(content)
 }
-React.$ToastHide= function(){
+React.$LoadingClear= function(){
 	Toast.hide()
 }
 

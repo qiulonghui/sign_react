@@ -2,26 +2,6 @@ import styled from 'styled-px2vw'
 import closeBtnPic from '../../../../assets/btn_close.png'
 import bg from '../../../../assets/jp_kuang.png'
 
-export const ModalMask = styled.div`
-	position: fixed;
-	top:0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: 998;
-	background-color: rgba(0,0,0,0.6);
-`
-
-export const ModalWrapper = styled.div`
-	position: fixed;
-	top:0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: 998;
-	background-color: transparent;
-`
-
 export const Modal = styled.div`
 	position: relative;
 	top:50%;
