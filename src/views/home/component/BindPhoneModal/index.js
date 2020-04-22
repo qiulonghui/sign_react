@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
 import ReactDOM, {createPortal} from 'react-dom'
-import {ModalMask, Modal, ModalHeader, ModalContent, InputWrapper, PhoneInput, CodeBtn, CodeInput, SubmitBtn, CloseBtn} from './style'
-import WithBodyScrollPrevent from '../../../../common/WithBodyScrollPrevent'
+import { Modal, ModalHeader, ModalContent, InputWrapper, PhoneInput, CodeBtn, CodeInput, SubmitBtn, CloseBtn} from './style'
+import WithBodyScrollPrevent from '@/common/WithBodyScrollPrevent'
+import TransitionModal from '@/common/TransitionModal'
+import {getSmsCode, phoneLogin} from '@/api/home'
+import { setIsBound } from '@/utils/sessionStorage'
 
 const container = document.createElement('div')
 
-const closeModal = function() {
+const handleTransitionExited = function() {
 	ReactDOM.unmountComponentAtNode(container)
 }
 
@@ -13,10 +16,23 @@ class BindPhoneModal extends Component {
 	constructor(props) {
 		super(props)
 		this.state={
+			visible: false,
 			phone: '',
 			smsCode: '',
 			sceonds: 60
 		}
+	}
+
+	componentDidMount () {
+		this.setState({
+			visible: true
+		})
+	}
+
+	closeModal = () => {
+		this.setState({
+			visible: false
+		})
 	}
 
 	decreaseSeconds = ()=> {
@@ -39,11 +55,28 @@ class BindPhoneModal extends Component {
 			React.$Toast('请输入移动手机号码')
 			return 
 		} 
-		this.decreaseSeconds()
+		const phone = this.state.phone
+		getSmsCode({phone}).then(res=> {
+			this.decreaseSeconds()
+			React.$Toast('验证码已发送')
+		}).catch(res=> {
+			const {msg} = res
+			React.$Toast(msg)
+		})
 	}
 
 	handleFormSubmit = () => {
 		if(!this.submitValidate()) return 
+		const phone = this.state.phone
+		const code = this.state.smsCode
+		phoneLogin({phone,code}).then(()=> {
+			React.$Toast('操作成功')
+			setIsBound(true)
+			this.closeModal()
+		}).then(res=>{
+			const {msg} = res
+			React.$Toast(msg)
+		})
 	}
 
 	handleInputChange = (stateKay, e) => {
@@ -73,7 +106,7 @@ class BindPhoneModal extends Component {
 
 	render() {
 		return createPortal(
-			<ModalMask onClick={closeModal}>
+			<TransitionModal handleClose={this.closeModal} show={this.state.visible} transitionExited={handleTransitionExited}>
 				<Modal onClick={e=>e.stopPropagation()}>
 					<ModalHeader>请输入手机号码绑定和留言</ModalHeader>
 					<ModalContent>
@@ -86,9 +119,9 @@ class BindPhoneModal extends Component {
 						</InputWrapper>
 						<SubmitBtn onClick={this.handleFormSubmit}></SubmitBtn>
 					</ModalContent>
-					<CloseBtn onClick={closeModal}></CloseBtn>
+					<CloseBtn onClick={this.closeModal}></CloseBtn>
 				</Modal>
-			</ModalMask>,
+			</TransitionModal>,
 			document.body
 		)
 	}

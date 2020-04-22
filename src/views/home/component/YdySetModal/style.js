@@ -1,20 +1,10 @@
 import styled from 'styled-px2vw'
-import closeBtnPic from '../../../../assets/btn_close.png'
-import titlePic  from'../../../../assets/zhongjiang_title.png'
-import setBtnPic from '../../../../assets/btn_shezhi.png'
-import playBtnPic from '../../../../assets/btn_play.png'
-import pauseBtnPic from '../../../../assets/btn_stop.png'
+import closeBtnPic from '@/assets/btn_close.png'
+import titlePic  from'@/assets/zhongjiang_title.png'
+import setBtnPic from '@/assets/btn_shezhi.png'
+import playBtnPic from '@/assets/btn_play.png'
+import pauseBtnPic from '@/assets/btn_stop.png'
 
-
-export const ModalMask = styled.div`
-	position: fixed;
-	top:0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: 998;
-	background-color: rgba(0,0,0,0.6);
-`
 export const Modal = styled.div`
 	position: relative;
 	top:50%;
@@ -26,7 +16,7 @@ export const Modal = styled.div`
 	border-radius:24px;
 	border: 4px solid #000;
 	background-color: #2BB5FC;
-	overflow: hidden;
+	/* overflow: hidden; */
 `
 
 export const ModalHeader = styled.div`

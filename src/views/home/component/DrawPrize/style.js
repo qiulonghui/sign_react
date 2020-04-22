@@ -1,5 +1,5 @@
 import styled from 'styled-px2vw'
-import itemBg from '../../../../assets/pic_cjbg.png'
+import itemBg from '@/assets/pic_cjbg.png'
 
 export const DrawPrizeWrapper = styled.div`
 `
@@ -21,7 +21,7 @@ export const DrawPrizeItem = styled.div`
 		width: 86px;
 		height: 88px;
 		margin-right: 17px;
-		background-image: url(${props=>props.iconUrl});
+		background-image: url(${props => props.iconUrl});
 		background-repeat: no-repeat;
 		background-size: contain;
 	}
@@ -37,16 +37,22 @@ export const DrawPrizeItem = styled.div`
 			color: #020202
 		}
 	}
-	.draw-btn{
-		width: 164px;
-		height: 64px;
-		line-height: 56px;
-		text-align: center;
-		font-size: 28px;
-		font-weight: 600;
-		background:rgba(251,174,66,1);
-		border:4px solid rgba(0,4,48,1);
-		border-radius:32px;
-	}
 }
+`
+
+export const DrawBtn = styled.div`
+	width: 164px;
+	height: 64px;
+	line-height: 56px;
+	text-align: center;
+	font-size: 28px;
+	font-weight: 600;
+	background:rgba(251,174,66,1);
+	border:4px solid rgba(0,4,48,1);
+	border-radius:32px;
+	&.disabled{
+		color:#666666;
+		background-color: #CCCCCC;
+		border-color: #666666;
+	}
 `

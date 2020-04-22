@@ -23,9 +23,9 @@ http.interceptors.request.use(
 // respone拦截器
 http.interceptors.response.use(
   response => {
-    const { code, data } = response.data
+		const { code } = response.data
     if (code === '200') {
-      return data
+      return response.data
     } else {
       Toast.hide() // 移除loading
       return Promise.reject(response.data)

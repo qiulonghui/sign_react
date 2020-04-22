@@ -1,6 +1,6 @@
 import styled from 'styled-px2vw'
-import closeBtnPic from '../../../../assets/btn_close.png'
-import bg from '../../../../assets/jp_kuang.png'
+import closeBtnPic from '@/assets/btn_close.png'
+import bg from '@/assets/jp_kuang.png'
 
 export const Modal = styled.div`
 	position: relative;
