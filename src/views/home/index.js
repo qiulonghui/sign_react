@@ -147,7 +147,7 @@ class Home extends Component {
 			const { msg } = res
 			React.$Toast(msg)
 		})
-
+		window._hmt.push(['_trackEvent', '点击签到', '点击签到', '点击签到'])
 	}
 
 	handleDrawLottery = (type) => {

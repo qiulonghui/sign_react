@@ -35,6 +35,7 @@ class YdySetModal extends PureComponent {
 			const {msg} = res
 			React.$Toast(msg)
 		})
+		window._hmt.push(['_trackEvent', '点击设置应答语', '点击设置应答语', '点击设置应答语'])
 	}
 
 	handlePlay = () => {
