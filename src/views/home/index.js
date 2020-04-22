@@ -18,16 +18,19 @@ import showYdySetModal from './component/YdySetModal'
 
 const computedMyAwardList = function (awards) {
 	const list = awards.map(award => {
+		let curItem = null
+		
 		for (const item of awardOptions) {
 			if (item.id === award.prizeType) {
 				const vox = award.vox || null
-				return {
+				curItem =  {
 					...item,
 					date: formatTime(award.time),
 					vox
 				}
 			}
 		}
+		return curItem
 	})
 	return list
 }
@@ -45,6 +48,7 @@ class Home extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			signToday: 0, // 今日未签到
 			totalDay: 0, // 天数
 			score: 0,
 			smallLuckyBag: 0, //  0未抽奖，1已抽奖
@@ -54,7 +58,7 @@ class Home extends Component {
 	}
 
 	async componentDidMount() {
-		await auth()
+		// await auth()
 		this.pageInitCheck()
 		wxShareInit()
 	}
@@ -98,14 +102,15 @@ class Home extends Component {
 			React.$LoadingClear()
 			setIsSubs(true)
 			setIsBound(true)
-			const { integral, totalDay, smallLuckyBag, bigLuckyBag, awards } = res.data
+			const { integral, totalDay, smallLuckyBag, bigLuckyBag, signToday, awards } = res.data
 			const myAwardList = computedMyAwardList(awards)
 			this.setState({
 				score: integral,
 				totalDay,
 				smallLuckyBag,
 				bigLuckyBag,
-				myAwardList
+				myAwardList,
+				signToday
 			})
 		}).catch(res => {
 			const { code, msg } = res
@@ -115,8 +120,7 @@ class Home extends Component {
 			} else if (code === '406') {// 手机未绑定公众号
 				setIsBound(false)
 				this.getDirLoginToken()
-			}
-			else {
+			}	else {
 				React.$Toast(msg)
 			}
 		})
@@ -129,9 +133,18 @@ class Home extends Component {
 			this.getDirLoginToken() // 调用一键绑定操作
 			return
 		}
+		const signTodayDict = {
+			'0': '未签到',
+			'1': '已签到'
+		}
+		const val = this.state.signTodayDict
+		if(signTodayDict[val] === '已签到') {
+			React.$Toast('今日已签到~')
+			return
+		}
 		updateDay().then(res => {
 			React.$LoadingClear()
-			const { signValue, totalDay, integral } = res.data
+			const { signValue, totalDay, signToday, integral } = res.data
 
 			const modalOptions = {
 				title: "提示",
@@ -141,7 +154,8 @@ class Home extends Component {
 			
 			this.setState({
 				score: integral,
-				totalDay
+				totalDay,
+				signToday
 			})
 		}).catch(res => {
 			const { msg } = res
@@ -150,7 +164,7 @@ class Home extends Component {
 		window._hmt.push(['_trackEvent', '点击签到', '点击签到', '点击签到'])
 	}
 
-	handleDrawLottery = (type) => {
+	handleDrawLottery = (item) => {
 		// 抽奖
 		if (!getIsBound()) {
 			// 未绑定手机号
@@ -158,7 +172,12 @@ class Home extends Component {
 			return
 		}
 
-		drawLottery(type).then(res => {
+		if(!item.active) {
+			React.$Toast(item.tipInfo)
+			return 
+		}
+
+		drawLottery(item.typeID).then(res => {
 			React.$LoadingClear()
 			const { data } = res
 			const { integral, smallLuckyBag, bigLuckyBag, awards } = data

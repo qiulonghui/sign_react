@@ -32,11 +32,16 @@ http.interceptors.response.use(
     }
   },
   error => {
-    // http错误处理
-    const { message, response } = error
-    console.log('err', response) // for debug
-    Toast.info(message)
-    return Promise.reject(response)
+		// http错误处理
+    console.log('err' + error) // for debug
+    const {message, response} = error
+    const errInfo = {
+      // 无网络、请求超时 response 为undefined,
+      code: response ? response.status : 'otherError',
+      msg: message
+		}
+		Toast.info(message) 
+    return Promise.reject(errInfo)
   }
 )
 

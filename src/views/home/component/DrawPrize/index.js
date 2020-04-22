@@ -1,52 +1,51 @@
 import React from 'react';
-import {DrawPrizeWrapper, DrawPrizeItem, DrawBtn} from './style.js'
-import {drawPrizeType} from '../../options'
+import { DrawPrizeWrapper, DrawPrizeItem, DrawBtn } from './style.js'
+import { drawPrizeType } from '../../options'
 
-function DrawPrize (props) {
+function DrawPrize(props) {
 
-	let btnsTxt = []
-	let btnsState = []
-
-	const computeBtnState = function () { // 计算按钮状态
-		btnsState = drawPrizeType.map(item => {
-			if(props.smallLuckyBag===1&&item.type==='0') { //type'0'小福袋 1代表已经抽过奖了
-				return 'disabled'
-			}else if(props.bigLuckyBag===1&&item.type==='1') { //type'1'大福袋
-				return 'disabled'
-			} else if((props.score<item.scoreLimit)) {
-				return 'disabled'
+	const computedList = function () {
+		let active = true
+		let btnTxt = '立即抽奖'
+		let tipInfo = ''
+		const bagStatus = {
+			'0': '未抽',
+			'1': '已抽'
+		}
+		const sVal = props.smallLuckyBag // 0 || 1
+		const bVal = props.bigLuckyBag // 0 || 1
+		const list = drawPrizeType.map(item => {
+			if (bagStatus[sVal] === '已抽' && item.type === '小福袋') { 
+				active = false
+				btnTxt = '已抽奖'
+				tipInfo = '小福袋已经抽过了~'
+			} else if (bagStatus[bVal] === '已抽' && item.type === '大福袋') {
+				active = false
+				btnTxt = '已抽奖'
+				tipInfo = '大福袋已经抽过了~'
+			} else if ((props.score < item.scoreLimit)) {
+				active = false
+				btnTxt = '立即抽奖'
+				tipInfo = '言值不够了...'
 			} else {
-				return 'active'
+				active = true
+				btnTxt = '立即抽奖'
 			}
-		})	
+			return {
+				...item,
+				active,
+				btnTxt,
+				tipInfo
+			}
+		})
+		return list
 	}
 
-	const computeBtnTxt= function() {
-		if(props.smallLuckyBag===1) {
-			btnsTxt[0] = '已抽奖'
-		}else {
-			btnsTxt[0] = '立即抽奖'
-		}
-		if(props.bigLuckyBag===1) {
-			btnsTxt[1] = '已抽奖'
-		}else {
-			btnsTxt[1] = '立即抽奖'
-		}
-	}
-
-	// const handleBtnClick = function(item){
-	// 	if(item.type==='1') {
-
-	// 	}
-		
-	// }
-
-	computeBtnState()
-	computeBtnTxt()
+	const bagsList = computedList()
 
 	return (
 		<DrawPrizeWrapper>
-			{drawPrizeType.map((item,index)=>{
+			{bagsList.map(item => {
 				return (
 					<DrawPrizeItem iconUrl={item.icon} key={item.type}>
 						<div className="draw-item" >
@@ -55,8 +54,8 @@ function DrawPrize (props) {
 								<div className='m-desc'>{item.mDesc}</div>
 								<div className="sub-desc">{item.subDesc}</div>
 							</div>
-							<DrawBtn className={btnsState[index]} onClick={()=>props.drawLottery(item.type)}>
-								{btnsTxt[index]}
+							<DrawBtn className={item.active?'':'disabled'} onClick={() => props.drawLottery(item)}>
+								{item.btnTxt}
 							</DrawBtn>
 						</div>
 					</DrawPrizeItem>

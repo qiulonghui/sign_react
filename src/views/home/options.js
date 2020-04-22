@@ -1,14 +1,16 @@
 
 export const drawPrizeType = [
 	{
-		type: '0',
+		type: '小福袋',
+		typeID: '0',
 		icon: require('../../assets/pic_fudai1.png'),
 		mDesc: '100言值抽奖',
 		subDesc: '含视频会员周卡、VIP应答语',
 		scoreLimit: 100
 	},
 	{
-		type: '1',
+		type: '大福袋',
+		typeID: '1',
 		icon: require('../../assets/pic_fudai2.png'),
 		mDesc: '200言值抽奖',
 		subDesc: '含视频会员周卡和月卡',
