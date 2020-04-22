@@ -3,6 +3,7 @@ import { HomeWrapper, TopWrapper, MainWrapper, AwardWrapper, AwardItem } from '.
 import { awardTypes, awardOptions } from './options'
 import { formatTime } from '../../utils/util'
 import { auth, getUserData, getAppID, getPreSign, getSignApi, getTokenInfo, updateDay, drawLottery } from '../../api/home.js'
+import {wxShareInit} from '../../api/wxShareApi'
 import { setIsSubs, setIsBound, getIsBound } from '../../utils/sessionStorage'
 import DrawPrize from './component/DrawPrize'
 import showRuleModal from './component/RuleModal'
@@ -55,6 +56,7 @@ class Home extends Component {
 	async componentDidMount() {
 		await auth()
 		this.pageInitCheck()
+		wxShareInit()
 	}
 
 	getDirLoginToken = () => {

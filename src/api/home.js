@@ -1,4 +1,5 @@
 import http from '../utils/http'
+import axios from 'axios'
 
 export function auth() {
 	return http({
@@ -135,5 +136,15 @@ export function setYdy(id) {
 	return http({
 		url: `/active/zsh/setvox?fileId=${id}&actId=signHlyVact`,
 		method: 'get'
+	})
+}
+
+// 获取微信签名参数
+export function getWxConfig(shareUrl){
+	return axios.get('/active/wechat/shareIndex',{
+		params: {
+			url:shareUrl,
+			ts:new Date().getTime() 
+		}
 	})
 }

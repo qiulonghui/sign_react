@@ -25,7 +25,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+		"extends": "react-app",
+		"globals": {
+			"wx": true
+		}
   },
   "browserslist": {
     "production": [
