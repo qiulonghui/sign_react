@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import ReactDOM, {createPortal} from 'react-dom'
-import { Modal, ModalHeader, ModalContent, CloseBtn, MiniPlayer, PlayBtn, PauseBtn, SetBtn } from './style'
+import { Modal, ModalHeader, ModalContent, CloseBtn, MiniPlayer, ControlBtn, SetBtn } from './style'
 import {setYdy} from '@/api/home'
 import WithBodyScrollPrevent from '@/common/WithBodyScrollPrevent'
 import TransitionModal from '@/common/TransitionModal'
@@ -15,7 +15,8 @@ class YdySetModal extends PureComponent {
 	constructor(props) {
 		super(props)
 		this.state = { 
-			visible: false
+			visible: false,
+			playing: false
 		}
 		this.audioDom = React.createRef();
 	}
@@ -38,15 +39,26 @@ class YdySetModal extends PureComponent {
 		window._hmt.push(['_trackEvent', '点击设置应答语', '点击设置应答语', '点击设置应答语'])
 	}
 
-	handlePlay = () => {
+	componentDidUpdate(){
 		const audioDom = this.audioDom.current
-		audioDom.play()
+		if(this.state.playing) {
+			audioDom.play()
+		}else{
+			audioDom.pause()
+		}
 	}
 
-	handlePause = () => {
-		const audioDom = this.audioDom.current
-		audioDom.pause()
-	} 
+	handlePlayingState = () => {
+		this.setState({
+			playing: !this.state.playing
+		})
+	}
+
+	handlePlayEnd = () => {
+		this.setState({
+			playing: false
+		})
+	}
 
 	closeModal = () => {
 		this.setState({
@@ -64,8 +76,7 @@ class YdySetModal extends PureComponent {
 					<ModalContent>
 						<div className="title">VIP应答语</div>
 						<MiniPlayer>
-							<PlayBtn onClick={this.handlePlay}></PlayBtn>
-							<PauseBtn onClick={this.handlePause}></PauseBtn>
+							<ControlBtn className={this.state.playing?"pauseBtn":"playBtn"} onClick={this.handlePlayingState}></ControlBtn>
 							<div className='txt'>{vox.voxTitle}</div>
 						</MiniPlayer>
 						<SetBtn onClick={()=>this.handleSetYdy(vox.fileId)}></SetBtn>
@@ -73,7 +84,7 @@ class YdySetModal extends PureComponent {
 						<div className="tip">扫码关注和留言，享更多服务</div>
 					</ModalContent>
 					<CloseBtn onClick={this.closeModal}></CloseBtn>
-					<audio ref={this.audioDom}>
+					<audio ref={this.audioDom} onEnded={this.handlePlayEnd}>
 						<source src={vox.voxFile} type="audio/mpeg"></source>
 					</audio>
 				</Modal>

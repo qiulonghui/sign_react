@@ -73,34 +73,30 @@ export const MiniPlayer = styled.div`
 	border:4px solid rgba(59,59,59,1);
 	border-radius:10px;
 	.txt{
-		max-width: 260px;
+		max-width: 320px;
 		white-space:nowrap;
 		overflow:hidden;
 		text-overflow:ellipsis;
-		margin-left: 10px;
+		margin-left: 15px;
 		font-size: 30px;
 	}
 `
 
-export const PlayBtn = styled.div`
+export const ControlBtn = styled.div`
 	width: 46px;
 	height: 46px;
 	border-radius:50%;
-	background-image: url(${playBtnPic});
 	background-size: contain;
 	background-repeat: no-repeat;
 	overflow:hidden;
+	&.pauseBtn {
+		background-image: url(${pauseBtnPic});
+	}
+	&.playBtn {
+		background-image: url(${playBtnPic});
+	}
 `
-export const PauseBtn = styled.div`
-	width: 46px;
-	height: 46px;
-	border-radius:50%;
-	margin-left:12px;
-	background-image: url(${pauseBtnPic});
-	background-size: contain;
-	background-repeat: no-repeat;
-	overflow:hidden;
-`
+
 export const SetBtn = styled.div`
 	width: 240px;
 	height: 80px;

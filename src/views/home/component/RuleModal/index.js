@@ -43,7 +43,7 @@ class RuleModal extends Component {
 				<Modal onClick={e=>e.stopPropagation()}>
 					<ModalHeader>活动规则</ModalHeader>
 					<ModalContent ref={this.scrollEl}>
-						<p>【活动对象】 <br/>中国移动和留言订购用户</p>
+						<p>【活动对象】 <br/>中国移动用户（不含港澳台、副卡用户）</p>
 						<p>【活动时间】<br/>即日起至2020年6月30日</p>
 						<p>【活动规则】</p>
 						<p>1、活动期间的和留言微信绑定用户通过活动参与每日签到，每天签到随机获得10-30【言值】;</p>
