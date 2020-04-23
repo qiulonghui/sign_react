@@ -19,7 +19,7 @@ import showYdySetModal from './component/YdySetModal'
 const computedMyAwardList = function (awards) {
 	const list = awards.map(award => {
 		let curItem = null
-		
+
 		for (const item of awardOptions) {
 			if (item.id === award.prizeType) {
 				const vox = award.vox || null
@@ -137,7 +137,7 @@ class Home extends Component {
 			'0': '未签到',
 			'1': '已签到'
 		}
-		const val = this.state.signTodayDict
+		const val = this.state.signToday
 		if(signTodayDict[val] === '已签到') {
 			React.$Toast('今日已签到~')
 			return
