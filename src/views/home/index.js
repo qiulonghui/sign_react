@@ -58,7 +58,7 @@ class Home extends Component {
 	}
 
 	async componentDidMount() {
-		await auth()
+		// await auth()
 		this.pageInitCheck()
 		wxShareInit()
 	}

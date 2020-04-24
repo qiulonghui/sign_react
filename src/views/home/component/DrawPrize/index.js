@@ -26,7 +26,7 @@ function DrawPrize(props) {
 			} else if ((props.score < item.scoreLimit)) {
 				active = false
 				btnTxt = '立即抽奖'
-				tipInfo = '言值不够了...'
+				tipInfo = '加油！您还未有足够言值~'
 			} else {
 				active = true
 				btnTxt = '立即抽奖'
