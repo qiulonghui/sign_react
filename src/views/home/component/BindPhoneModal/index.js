@@ -4,7 +4,6 @@ import { Modal, ModalHeader, ModalContent, InputWrapper, PhoneInput, CodeBtn, Co
 import WithBodyScrollPrevent from '@/common/WithBodyScrollPrevent'
 import TransitionModal from '@/common/TransitionModal'
 import { getSmsCode, phoneLogin } from '@/api/home'
-import { setIsBound } from '@/utils/sessionStorage'
 
 const container = document.createElement('div')
 

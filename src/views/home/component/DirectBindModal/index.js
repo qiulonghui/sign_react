@@ -4,7 +4,6 @@ import { Modal, ModalHeader, ModalContent, BindBtn, CloseBtn } from './style'
 import WithBodyScrollPrevent from '@/common/WithBodyScrollPrevent'
 import TransitionModal from '@/common/TransitionModal'
 import { getUserInfo } from '@/api/home'
-import { setIsBound } from '@/utils/sessionStorage'
 
 const container = document.createElement('div')
 
