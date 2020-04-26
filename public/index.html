@@ -2,55 +2,55 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8" />
-	<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="" />
-	<!-- 一键登录 -->
-	<meta content="always" name="referrer">
-	<script>
-		var _udata = _udata || [];
-	</script>
-	<script type="text/javascript" src="https://www.cmpassport.com/NumberAbility/jssdk/jssdk.min.js"></script>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <!-- 一键登录 -->
+  <meta content="always" name="referrer">
+  <script>
+    var _udata = _udata || [];
+  </script>
+  <script type="text/javascript" src="https://www.cmpassport.com/NumberAbility/jssdk/jssdk.min.js"></script>
 
-	<!-- 微信分享 -->
-	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-	<title>和留言高言值粉丝签到有礼</title>
-	<!-- 使用CDN的JS文件 preload -->
-	<% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
-	<link href="<%= htmlWebpackPlugin.options.cdn.js[i] %>" rel="preload" as="script">
-	<% } %>
+  <!-- 微信分享 -->
+  <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <title>和留言粉丝签到有礼</title>
+  <!-- 使用CDN的JS文件 preload -->
+  <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+  <link href="<%= htmlWebpackPlugin.options.cdn.js[i] %>" rel="preload" as="script">
+  <% } %>
 
-	<!-- 百度统计 -->
-	<script>
-		var url = document.location.href;
-		var _hmt = _hmt || [];
-		var bdUrl = '';
-		if (url.indexOf('yyxx.10086.cn') > 0) {
-			bdUrl = '//hm.baidu.com/hm.js?d3bccd64e8d80ab8ac93cf79c266c9f6';
+  <!-- 百度统计 -->
+  <script>
+    var url = document.location.href;
+    var _hmt = _hmt || [];
+    var bdUrl = '';
+    if (url.indexOf('yyxx.10086.cn') > 0) {
+      bdUrl = '//hm.baidu.com/hm.js?d3bccd64e8d80ab8ac93cf79c266c9f6';
 
-		} else if (url.indexOf('v.mail.10086.cn') > 0) {
-			bdUrl = '//hm.baidu.com/hm.js?1e02e0e32d00333b59aeafb159e2b679';
+    } else if (url.indexOf('v.mail.10086.cn') > 0) {
+      bdUrl = '//hm.baidu.com/hm.js?1e02e0e32d00333b59aeafb159e2b679';
 
-		} else if (url.indexOf('wx.hekouxin.com') > 0) {
-			bdUrl = '//hm.baidu.com/hm.js?fcf92271e22a748b35c2fa991e97404b';
-		}
-		(function () {
-			var hm = document.createElement('script');
-			hm.src = bdUrl;
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(hm, s);
-		})();
-	</script>
+    } else if (url.indexOf('wx.hekouxin.com') > 0) {
+      bdUrl = '//hm.baidu.com/hm.js?fcf92271e22a748b35c2fa991e97404b';
+    }
+    (function () {
+      var hm = document.createElement('script');
+      hm.src = bdUrl;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 </head>
 
 <body>
-	<noscript>You need to enable JavaScript to run this app.</noscript>
-	<div id="root"></div>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
 
-	<% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
-	<script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
-	<% } %>
+  <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+  <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+  <% } %>
 </body>
 
 </html>
