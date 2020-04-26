@@ -39,7 +39,7 @@ class DirectBindModal extends Component {
       userInformation
     }).then(res => {
       React.$Toast('操作成功')
-      this.updateUserInfo()
+      this.props.updateUserInfo()
       this.closeModal()
     }).catch(res => {
       const { msg } = res
