@@ -19,6 +19,7 @@ class DirectBindModal extends Component {
     }
   }
   componentDidMount() {
+    document.scrollingElement.scrollTop = 0
     this.setState({
       visible: true
     })
